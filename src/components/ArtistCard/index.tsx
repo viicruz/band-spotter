@@ -5,9 +5,12 @@ import Image from "next/image";
 import { useState, useEffect } from 'react';
 import { SpotifyApi, type Artist } from '@spotify/web-api-ts-sdk';
 
+import {env} from '@/env/index'
+
+
+const sdk = SpotifyApi.withClientCredentials(env.SPOTIFY_CLIENT_ID, env.SPOTIFY_SECRET_ID);
 
 export function ArtistCard() {
-  const sdk = SpotifyApi.withClientCredentials("SPOTIFY_CLIENT_ID", "SPOTIFY_SECRET_ID");
   const [artist, setArtist] = useState<Artist | null>(null);
   const artistFollowers = artist?.followers.total.toString();
 
@@ -31,7 +34,8 @@ export function ArtistCard() {
   }, []);
 
   return (
-    <button className="w-36 border-2 h-44 rounded-lg justify-center flex items-center flex-col shadow-base">
+    <div className="bg-transparent rounded-lg transition-all hover:bg-gradient-to-br from-emerald-500 to-violet-500 p-[2px]">
+      <button className="w-36  h-44 rounded-lg justify-center flex items-center flex-col shadow-lg bg-white">
       {artist && artist.images.length > 0 && (
         <Image
           className="rounded-full pt-1"
@@ -47,5 +51,6 @@ export function ArtistCard() {
         <h2 className="font-light text-xs text-neutral-500 text-start w-full">{artistFollowers} Seguidores</h2>
       </div>
     </button>
+    </div>
   )
 }
