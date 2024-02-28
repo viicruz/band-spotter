@@ -2,7 +2,6 @@
 
 //Libraries Imports
 import Image from 'next/image';
-import { type Artist } from '@spotify/web-api-ts-sdk';
 
 //Components Imports
 import { SearchBar } from '@/components/SearchBar';

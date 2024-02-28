@@ -23,7 +23,7 @@ export function ArtistSection(props:Props) {
         GetArtists().then(data => setArtists(data.artists.items))
     }, [])
     return (
-        <section className='justify-center flex bg-gradient-to-b from-white to-white/70 pb-8'>
+        <section className='justify-center flex bg-gradient-to-b from-white to-white/70 p-8'>
             <div className='flex flex-col'>
                 <div className=' bg-white shadow-lg p-4 flex-col'>
                     <div className='flex justify-center border-b-2 border-emerald-500'>
@@ -31,7 +31,7 @@ export function ArtistSection(props:Props) {
                             {props.title}
                         </p>
                     </div>
-                    <div className=' flex flex-row gap-3'>
+                    <div className=' flex flex-row gap-3 p-2'>
                         {artists?.map((artist, index) => {
                             console.log(artist)
                             return (

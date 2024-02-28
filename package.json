@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.1",
     "@phosphor-icons/react": "^2.0.15",
     "@prisma/client": "^5.10.2",
     "@spotify/web-api-ts-sdk": "^1.2.0",
