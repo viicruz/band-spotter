@@ -5,9 +5,15 @@ import { MagnifyingGlass } from '@phosphor-icons/react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import type { ChangeEvent } from 'react'
 
+
+//Components Imports
+import { SearchCard } from '../SearchCard';
+
+const listData = [1, 2, 3, 4, 5];
+
 export function SearchBar() {
   const [show, setShow] = useState(false);
-  const parent = useAutoAnimate({duration:500, easing:'ease-in-out'})[0];
+  const parent = useAutoAnimate({ duration: 500, easing: 'ease-in-out' })[0];
   const [text, setText] = useState('');
 
   const reveal = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,11 +32,11 @@ export function SearchBar() {
         {
           show && <div className='w-full p-0 text-black bg-white border-t-2 border-neutral-200'>
             <ul>
-              <li>Apple</li>
-              <li>Orange</li>
-              <li>Banana</li>
-              <li>Strawberry</li>
-              <li>Grapes</li>
+              <li className='pt-2 pb-2 flex gap-2 flex-col'>
+                {listData.map((data, index) => (
+                  <SearchCard key={index} />
+                ))}
+              </li>
             </ul>
           </div>
         }
