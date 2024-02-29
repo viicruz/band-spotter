@@ -1,26 +1,48 @@
 'use client'
-//Libraries Imports
-import { useState, useRef } from 'react';
+//Libraries imports
+import { useState, useEffect } from 'react';
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import type { ChangeEvent } from 'react'
+import { Artist } from '@spotify/web-api-ts-sdk';
 
 
-//Components Imports
+
+//Components imports
 import { SearchCard } from '../SearchCard';
 
-const listData = [1, 2, 3, 4, 5];
+//Hook imports
+import { useDebounce } from '@/hooks/useDebounce';
+
+
+
+async function search(query: string) {
+
+  const response = await fetch('/api/search-artists?search=' + query);
+  const artists = (await response.json()).artists;
+  console.log(artists)
+  return artists as Artist[];
+}
 
 export function SearchBar() {
   const [show, setShow] = useState(false);
   const parent = useAutoAnimate({ duration: 500, easing: 'ease-in-out' })[0];
   const [text, setText] = useState('');
+  const debouncedText = useDebounce(text, 750);
+  const [artists, setArtists] = useState<Artist[]>([]);
 
   const reveal = (e: ChangeEvent<HTMLInputElement>) => {
     const inputText: string = e.target.value;
     setText(inputText);
     setShow(inputText.length > 0);
   }
+
+
+
+  useEffect(() => {
+    search(debouncedText).then(data => setArtists(data))
+  }, [debouncedText])
+
 
   return (
     <div className='border-2 w-full max-w-[512px] flex flex-col pl-3  pr-3 rounded-lg  bg-white overflow-hidden '>
@@ -33,9 +55,10 @@ export function SearchBar() {
           show && <div className='w-full p-0 text-black bg-white border-t-2 border-neutral-200'>
             <ul>
               <li className='pt-2 pb-2 flex gap-2 flex-col'>
-                {listData.map((data, index) => (
+                {artists.map((data, index) => (
                   <SearchCard key={index} />
                 ))}
+                
               </li>
             </ul>
           </div>

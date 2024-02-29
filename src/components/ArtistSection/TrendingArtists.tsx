@@ -6,7 +6,6 @@ import type { Artist } from "@spotify/web-api-ts-sdk";
 async function getArtists() {
     const response = await fetch('/api/artists');
     const artists = (await response.json()).artists.items;
-    console.log(artists)
     return artists as Artist[];
 }
 
