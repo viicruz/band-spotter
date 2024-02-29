@@ -1,11 +1,11 @@
 "use client"
-
 //Libraries Imports
 import Image from 'next/image';
 
 //Components Imports
 import { ArtistSection } from '@/components/ArtistSection';
 import { NavBar } from '@/components/NavBar';
+import { TrendingArtists } from '@/components/ArtistSection/TrendingArtists'
 
 const sectionData = [
   { id: 1, title: 'Últimos Artistas Contratados' },
@@ -24,12 +24,7 @@ export default function Home() {
       </div>
 
       <main className="w-full min-h-screen bg-white">
-        {
-          sectionData.map((section, index) => (
-            <ArtistSection key={section.id} title={section.title} />
-          ))
-        }
-
+          <TrendingArtists />
       </main>
     </div>
 
