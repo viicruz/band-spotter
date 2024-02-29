@@ -1,6 +1,6 @@
 //Libraries Imports
-import Image from "next/image";
 import { UsersThree } from "@phosphor-icons/react";
+import { Avatar } from "../Avatar";
 
 type Props = {
   image: string,
@@ -13,13 +13,7 @@ export function ArtistCard(props: Props) {
     <div className="bg-transparent rounded-lg transition-all hover:bg-gradient-to-br from-emerald-500 to-violet-500 p-[2px]">
       <button className="w-36 h-44 rounded-lg justify-center flex items-center flex-col shadow-lg bg-white p-1 border border-neutral-300">
         <div className="rounded-full overflow-hidden min-h-32 max-h-32 h-32 min-w-32 max-w-32 w-32 bg-slate-700 ">
-          <Image
-            className="object-cover w-full h-full"
-            alt="Artist card"
-            src={props.image}
-            width={128}
-            height={128}
-          />
+          <Avatar image={props.image} />
         </div>
 
         <div className="w-full h-full flex flex-col items-center justify-center">

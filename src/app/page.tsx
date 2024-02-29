@@ -3,17 +3,10 @@
 import Image from 'next/image';
 
 //Components Imports
-import { ArtistSection } from '@/components/ArtistSection';
 import { NavBar } from '@/components/NavBar';
 import { TrendingArtists } from '@/components/ArtistSection/TrendingArtists'
 import { LastHires } from '@/components/ArtistSection/LatestHires';
 import { NewTrends } from '@/components/ArtistSection/NewTrends';
-
-const sectionData = [
-  { id: 1, title: 'Últimos Artistas Contratados' },
-  { id: 2, title: 'Artistas em Destaque' },
-  { id: 3, title: 'Novas Tendências' }
-];
 
 export default function Home() {
   return (
