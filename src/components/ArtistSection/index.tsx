@@ -19,7 +19,6 @@ export function ArtistSection(props: Props) {
         <ul>
           <li className=' flex flex-row gap-3 p-2'>
             {props.artists?.map((artist, index) => {
-              console.log(artist)
               return (
                 <ArtistCard name={artist.name} followers={artist.followers.total} image={artist.images[0]?.url || ''} key={index} />
               )

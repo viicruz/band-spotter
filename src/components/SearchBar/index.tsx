@@ -20,7 +20,6 @@ async function search(query: string) {
 
   const response = await fetch('/api/search-artists?search=' + query);
   const artists = (await response.json()).artists;
-  console.log(artists)
   return artists as Artist[];
 }
 
