@@ -1,3 +1,7 @@
+import { InfoInput } from "../InfoInput";
+
+
+
 export function Modal() {
   return (
     <div className='flex flex-col p-4 gap-6 items-center  border-2 rounded-lg border-black  '>
@@ -12,19 +16,19 @@ export function Modal() {
 
           <div className='flex flex-col gap-1'>
             <h2 className='text-black text-base font-bold pb-1'>Nome do contratante</h2>
-            <input type="text" className='border-2 border-black' />
+            <InfoInput/>
           </div>
 
 
           <div className="flex flex-col gap-1">
             <h2 className='text-black text-base font-bold pb-1'>Cache para o artista</h2>
-            <input type="text" className='border-2 border-black' />
+            <InfoInput/>
           </div>
 
 
           <div className="flex flex-col gap-1">
             <h2 className='text-black text-base font-bold pb-1'>Data do vento</h2>
-            <input type="text" className='border-2 border-black' />
+            <InfoInput/>
           </div>
 
 
@@ -38,14 +42,14 @@ export function Modal() {
               <h2 className='font-bold text-black'>
                 Cep
               </h2>
-              <input type="text" className="border-2 border-black" />
+              <InfoInput/>
             </div>
 
             <div className='py-1'>
               <h2 className='font-bold text-black'>
                 Número
               </h2>
-              <input type="text"  className="border-2 border-black"/>
+              <InfoInput/>
             </div>
 
           </div>
@@ -54,14 +58,14 @@ export function Modal() {
               <h2 className='font-bold text-black'>
                 Rua/Logradouro
               </h2>
-              <input type="text" className="border-2 border-black"/>
+              <InfoInput/>
             </div>
 
             <div className='flex flex-col gap-2'>
               <h2 className='font-bold text-black'>
                 Bairro
               </h2>
-              <input type="text" className="border-2 border-black" />
+              <InfoInput/>
             </div>
 
             <div className=' gap-2 flex'>
@@ -70,14 +74,14 @@ export function Modal() {
               <h2 className='font-bold text-black'>
                 Cidade
               </h2>
-              <input type="text" className="border-2 border-black" />
+              <InfoInput/>
             </div>
 
             <div className='py-1'>
               <h2 className='font-bold text-black className="border-2 border-black"'>
                 Estado
               </h2>
-              <input type="text" className="border-2 border-black" />
+              <InfoInput/>
             </div>
             
           </div>
