@@ -1,10 +1,10 @@
 "use client"
 //Libraries Imports
-import Image from "next/image"
-import { UsersThree } from "@phosphor-icons/react"
+import { UsersThree } from "@phosphor-icons/react";
 
 //Components Imports
-import { MusicalGenreTag } from "../MusicalGenreTag"
+import { MusicalGenreTag } from "../MusicalGenreTag";
+import { Avatar } from "../Avatar";
 
 type Props = {
   name: string,
@@ -21,23 +21,21 @@ export function SearchCard(props: Props) {
         <div className="flex flex-row items-center gap-1">
 
           <div className="rounded-full overflow-hidden border min-h-8 max-h-8 min-w-8 max-w-8">
-            <Image
-              alt="ArtistImage"
-              src={props.image}
-              className="object-cover w-full h-full"
+            <Avatar
+              image={props.image}
               width={32}
               height={32}
             />
           </div>
 
-          <div className="border-l-2 border-neutral-200 border-r-2 px-1">
-            <p className="font-bold text-base">{props.name}</p>
+          <div className="border-l-2 border-neutral-200 border-r-2 px-1 min-w-40  max-w-40">
+            <p className="font-bold text-base  text-start w-full line-clamp-1">{props.name}</p>
             <div className="flex flex-row gap-1 items-center">
               <UsersThree className="text-xs text-neutral-500" />
               <p className="font-normal text-[0.65rem] text-neutral-500">{props.followers.toLocaleString('Pt-Br')}</p>
             </div>
           </div>
-          <div className="flex flex-row gap-1">
+          <div className="flex flex-row flex-wrap gap-1 justify-start items-start w-full h-10">
             {
               props.genres.map((data, index) => (
                 <MusicalGenreTag key={index} title={data} />

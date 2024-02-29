@@ -1,6 +1,8 @@
 import Image from "next/image";
 type Props = {
-    image: string
+    image: string,
+    width:number,
+    height:number
 }
 export function Avatar(props: Props) {
     return (
@@ -8,8 +10,8 @@ export function Avatar(props: Props) {
             className="object-cover w-full h-full"
             alt="Artist card"
             src={props.image}
-            width={128}
-            height={128}
+            width={ props.width}
+            height={props.height}
         />
     );
 }

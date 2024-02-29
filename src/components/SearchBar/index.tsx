@@ -59,7 +59,7 @@ export function SearchBar() {
                     name={data.name}
                     followers={data.followers.total}
                     genres={data.genres}
-                    image={data.images[0]?.url || ''}
+                    image={data.images[0]?.url || '/defaultImage.svg'}
                     key={data.id}
                   />
                 ))}
