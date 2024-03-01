@@ -8,10 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 //* Local Imports
 import { InfoInput } from "../InfoInput";
-import { ModalButton } from "../ModalButton";
-import { ModalArtistCard } from "../ModalArtistCard";
+import { ModalButton } from "../FormButton";
+import { ModalArtistCard } from "../FormArtistCard";
 import { contractArtistSchema, type FormData, type States } from "@/schemas/contractArtist";
 import { getCep } from "@/services/viaCep";
+
 
 async function postContractArtist(data: FormData) {
   const response = await fetch("/api/create-assign", {
@@ -21,7 +22,7 @@ async function postContractArtist(data: FormData) {
   return response;
 }
 
-export function Modal() {
+export function Form() {
   const form = useForm<FormData>({
     resolver: zodResolver(contractArtistSchema),
   });

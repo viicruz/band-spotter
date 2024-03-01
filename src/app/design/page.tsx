@@ -1,7 +1,7 @@
 "use client"
 //Libraries Imports
 import Image from 'next/image';
-import { Modal } from '@/components/Modal';
+import { Modal } from '@/components/Form';
 
 
 

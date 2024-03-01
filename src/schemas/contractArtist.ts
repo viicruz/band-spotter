@@ -67,8 +67,15 @@ const dateSchema = z
   .string()
   .refine(
     (data) => {
-      const date = new Date(data);
+      const formmatedDate = data.split('/');
+      const tmp = formmatedDate[0];
+      formmatedDate[0] = formmatedDate[1];
+      formmatedDate[1] = tmp;
+
+      console.log(formmatedDate)
+      const date = new Date(`${formmatedDate[0]}/${formmatedDate[1]}/${formmatedDate[2]}`);
       const today = new Date();
+      console.log(date.getDay(), date.getMonth(), date.getFullYear());
       return date > today;
     },
     { message: "A data do evento deve ser futura" }
