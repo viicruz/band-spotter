@@ -1,5 +1,6 @@
 import { InfoInput } from "../InfoInput";
 import { ModalButton } from "../ModalButton";
+import { ModalArtistCard } from "../ModalArtistCard";
 
 
 
@@ -9,7 +10,7 @@ export function Modal() {
       <h1 className='font-bold text-3xl text-black pb-3'>
         Contrate este artista
       </h1>
-      <div className='w-[478px] h-16 border border-black rounded-lg' />
+      <ModalArtistCard image="/defaultImage.svg"/>
 
       <div className='items-start w-full h-full pt-6 gap-6 flex flex-col'>
 
