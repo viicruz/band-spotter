@@ -1,4 +1,5 @@
 import { InfoInput } from "../InfoInput";
+import { ModalButton } from "../ModalButton";
 
 
 
@@ -27,7 +28,7 @@ export function Modal() {
 
 
           <div className="flex flex-col gap-1">
-            <h2 className='text-black text-base font-bold pb-1'>Data do vento</h2>
+            <h2 className='text-black text-base font-bold pb-1'>Data do evento</h2>
             <InfoInput/>
           </div>
 
@@ -89,7 +90,7 @@ export function Modal() {
         </section>
 
       </div>
-        <button className="p-2 bg-purple-800">Contratar</button>
+        <ModalButton/>
     </div>
   );
 }

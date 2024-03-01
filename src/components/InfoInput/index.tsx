@@ -1,7 +1,8 @@
 import { User, Money, Calendar, MapPin } from "@phosphor-icons/react"
 
+
 type Props={
-  
+
 }
 
 export function InfoInput(props:Props) {
