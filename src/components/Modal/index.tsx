@@ -1,97 +1,221 @@
+"use client";
+
+//* Libraries Imports
+import type { ChangeEvent } from "react";
+import { User, Money, Calendar, MapPin } from "@phosphor-icons/react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+//* Local Imports
 import { InfoInput } from "../InfoInput";
 import { ModalButton } from "../ModalButton";
 import { ModalArtistCard } from "../ModalArtistCard";
+import { contractArtistSchema, type FormData, type States } from "@/schemas/contractArtist";
+import { getCep } from "@/services/viaCep";
 
-
+async function postContractArtist(data: FormData) {
+  const response = await fetch("/api/create-assign", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  return response;
+}
 
 export function Modal() {
+  const form = useForm<FormData>({
+    resolver: zodResolver(contractArtistSchema),
+  });
+
+  function handleSubmit(data: FormData) {
+    postContractArtist(data);
+  }
+
+  const handleCep = async (cep: string) => {
+    try {
+      const data = await getCep(cep);
+      form.setValue('street', data.logradouro);
+      form.setValue('neighborhood', data.bairro);
+      form.setValue('city', data.localidade);
+      form.setValue('state', data.uf as States);
+      form.clearErrors('cep');
+    } catch (error) {
+      form.setError('cep', {
+        type: 'manual',
+        message: 'Cep inválido',
+      });
+      form.setValue('street', '');
+      form.setValue('neighborhood', '');
+      form.setValue('city', '');
+      form.setValue('state', '' as States);
+    }
+  }
+
   return (
-    <div className='flex flex-col p-4 gap-6 items-center  border-2 rounded-lg border-black  '>
-      <h1 className='font-bold text-3xl text-black pb-3'>
+    <form
+      className='flex flex-col items-center gap-6 p-4 border-2 border-black rounded-lg'
+      onSubmit={form.handleSubmit(handleSubmit)}
+    >
+      <h1 className='pb-3 text-3xl font-bold text-black'>
         Contrate este artista
       </h1>
-      <ModalArtistCard image="/defaultImage.svg"/>
 
-      <div className='items-start w-full h-full pt-6 gap-6 flex flex-col'>
+      <ModalArtistCard
+        image="/defaultImage.svg"
+        name="Nome do artista"
+        followers={1000}
+        genres={['Pop', 'Rock', 'Sertanejo']}
+      />
 
-        <section className='w-full gap-2 flex flex-col '>
+      <div className='flex flex-col items-start w-full h-full gap-6 pt-6'>
+        <div className='flex flex-col w-full gap-2 '>
 
-          <div className='flex flex-col gap-1'>
-            <h2 className='text-black text-base font-bold pb-1'>Nome do contratante</h2>
-            <InfoInput/>
+          <InfoInput
+            icon={User}
+            id="name"
+            label="Nome do contratante"
+            type="text"
+            placeholder="Nome"
+            error={form.formState?.errors?.name?.message?.toString()}
+            {...form.register("name", { required: true, minLength: 3, maxLength: 100 })}
+          />
+
+          <InfoInput
+            icon={Money}
+            id="cashe"
+            label="Valor do cache (R$)"
+            placeholder="200"
+            //we dont use float, just integers
+            type="number"
+            //remove float numbers
+            step="1"
+            error={form.formState?.errors?.cashe?.message?.toString()}
+            {...form.register("cashe", {
+              required: true,
+              min: 1,
+              max: 10000,
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                const value = e.target.value;
+                const removeNonDigits = value.replace(/\D/g, "");
+                const removeExtraDigits = removeNonDigits.slice(0, 6);
+                form.setValue("cashe", Number(removeExtraDigits));
+              }
+            })}
+          />
+
+          <InfoInput
+            icon={Calendar}
+            id="date"
+            label="Data do evento"
+            placeholder="dd/mm/aaaa"
+            error={form.formState?.errors?.date?.message?.toString()}
+            {...form.register("date", {
+              required: true,
+              onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                const value = e.target.value;
+                const removeNonDigits = value.replace(/\D/g, "");
+                const masked = removeNonDigits.replace(/(\d{2})(\d{2})(\d{4})/, "$1/$2/$3");
+                const removeExtraDigits = masked.slice(0, 10);
+                form.setValue("date", removeExtraDigits);
+              }
+            })}
+          />
+
+        </div>
+
+        <div className='flex flex-col w-full py-2'>
+          <div className='flex flex-row gap-2'>
+
+            <InfoInput
+              icon={MapPin}
+              id="cep"
+              label="Cep"
+              placeholder="00000-000"
+              error={form.formState?.errors?.cep?.message?.toString()}
+              {...form.register("cep", {
+                required: true,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                  const value = e.target.value;
+                  const removeNonDigits = value.replace(/\D/g, "");
+                  const masked = removeNonDigits.replace(/(\d{5})(\d{3})/, "$1-$2");
+                  const removeExtraDigits = masked.slice(0, 9);
+                  if (removeExtraDigits.length === 9)
+                    handleCep(removeExtraDigits.replace('-', ''));
+                  form.setValue("cep", removeExtraDigits);
+                }
+              })}
+            />
+
+
+            <InfoInput
+              icon={MapPin}
+              id="number"
+              label="Número"
+              type="number"
+              placeholder="123"
+              error={form.formState?.errors?.number?.message?.toString()}
+              {...form.register("number", {
+                required: true,
+                min: 1,
+                max: 10000,
+                onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                  const value = e.target.value;
+                  const removeNonDigits = value.replace(/\D/g, "");
+                  const removeExtraDigits = removeNonDigits.slice(0, 4);
+                  form.setValue("number", removeExtraDigits);
+                }
+              })}
+            />
           </div>
 
 
-          <div className="flex flex-col gap-1">
-            <h2 className='text-black text-base font-bold pb-1'>Cache para o artista</h2>
-            <InfoInput/>
+          <InfoInput
+            icon={MapPin}
+            id="street"
+            label="Rua/Logradouro"
+            disabled
+            placeholder="Rua"
+            error={form.formState?.errors?.street?.message?.toString()}
+            {...form.register("street")}
+          />
+
+
+          <InfoInput
+            icon={MapPin}
+            id="neighborhood"
+            label="Bairro"
+            disabled
+            placeholder="Bairro"
+            error={form.formState?.errors?.neighborhood?.message?.toString()}
+            {...form.register("neighborhood")}
+          />
+
+          <div className='flex flex-row gap-2'>
+
+            <InfoInput
+              icon={MapPin}
+              id="city"
+              label="Cidade"
+              disabled
+              placeholder="Cidade"
+              error={form.formState?.errors?.city?.message?.toString()}
+              {...form.register("city")}
+            />
+
+            <InfoInput
+              icon={MapPin}
+              id="state"
+              label="Estado"
+              disabled
+              placeholder="Estado"
+              error={form.formState?.errors?.state?.message?.toString()}
+              {...form.register("state")}
+            />
           </div>
 
-
-          <div className="flex flex-col gap-1">
-            <h2 className='text-black text-base font-bold pb-1'>Data do evento</h2>
-            <InfoInput/>
-          </div>
-
-
-        </section>
-
-        <section className='w-full py-2 flex flex-col'>
-
-          <div className='gap-2 flex '>
-
-            <div className='py-1'>
-              <h2 className='font-bold text-black'>
-                Cep
-              </h2>
-              <InfoInput/>
-            </div>
-
-            <div className='py-1'>
-              <h2 className='font-bold text-black'>
-                Número
-              </h2>
-              <InfoInput/>
-            </div>
-
-          </div>
-
-          <div className='flex flex-col gap-2'>
-              <h2 className='font-bold text-black'>
-                Rua/Logradouro
-              </h2>
-              <InfoInput/>
-            </div>
-
-            <div className='flex flex-col gap-2'>
-              <h2 className='font-bold text-black'>
-                Bairro
-              </h2>
-              <InfoInput/>
-            </div>
-
-            <div className=' gap-2 flex'>
-
-            <div className='py-1'>
-              <h2 className='font-bold text-black'>
-                Cidade
-              </h2>
-              <InfoInput/>
-            </div>
-
-            <div className='py-1'>
-              <h2 className='font-bold text-black className="border-2 border-black"'>
-                Estado
-              </h2>
-              <InfoInput/>
-            </div>
-            
-          </div>
-
-        </section>
+        </div>
 
       </div>
-        <ModalButton/>
-    </div>
+      <ModalButton />
+    </form>
   );
 }
