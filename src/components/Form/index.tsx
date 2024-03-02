@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 //* Local Imports
 import { InfoInput } from "../InfoInput";
-import { ModalButton } from "../FormButton";
+import { FormButton } from "../FormButton";
 import { ModalArtistCard } from "../FormArtistCard";
 import { contractArtistSchema, type FormData, type States } from "@/schemas/contractArtist";
 import { getCep } from "@/services/viaCep";
@@ -216,7 +216,7 @@ export function Form() {
         </div>
 
       </div>
-      <ModalButton />
+      <FormButton />
     </form>
   );
 }
