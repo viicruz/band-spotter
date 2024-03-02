@@ -6,16 +6,23 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "npx prisma generate && npm run build"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.1",
+    "@hookform/resolvers": "^3.3.4",
     "@phosphor-icons/react": "^2.0.15",
     "@prisma/client": "^5.10.2",
+    "@radix-ui/react-dialog": "^1.0.5",
     "@spotify/web-api-ts-sdk": "^1.2.0",
+    "dotenv": "^16.4.5",
     "jotai": "^2.6.5",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
+    "sonner": "^1.4.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {

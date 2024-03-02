@@ -1,18 +1,33 @@
+"use client"
 //Libraries Imports
+import Image from 'next/image';
 
 //Components Imports
-import { SearchBar } from '@/components/SearchBar';
-
-//Hooks Imports
+import { NavBar } from '@/components/NavBar';
+import { TrendingArtists } from '@/components/ArtistSection/TrendingArtists'
+import { LastHires } from '@/components/ArtistSection/LatestHires';
+import { NewTrends } from '@/components/ArtistSection/NewTrends';
 
 export default function Home() {
   return (
-    <main className="flex w-full min-h-screen flex-col  items-center justify-between p-4 bg-white ">
-      <div className="flex items-center flex-col">
-        <SearchBar/>
-        <p className="text-black text-6xl pt-5">BandSpotter</p>
-        <p className="text-black text-base">Its Show Time!</p>
+
+    <div className="flex relative min-h-svh flex-col items-center justify-between w-full bg-white">
+      <div className="w-full h-32 bg-gradient-to-br from-yellow-400 via-emerald-500 to-violet-500 absolute left-0 top-0" />
+      <div className='flex justify-center items-center flex-col h-64 bg-white/20 z-[1] backdrop-blur-3xl w-full '>
+        <NavBar />
+        <Image src={'/logo.svg'} width={300} height={300} alt='Apliccation Logo' />
+        <h2 className='text-black font-bold'>Não perca o próximo sucesso!</h2>
       </div>
-    </main>
+
+      <main className="w-full min-h-svh" >
+        <section>
+          <LastHires />
+          <TrendingArtists />
+          <NewTrends />
+        </section>
+
+      </main>
+    </div>
+
   );
 }
