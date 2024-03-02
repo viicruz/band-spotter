@@ -7,6 +7,7 @@ export async function GET() {
       artists: items.artists,
     });
   } catch (error) {
+    console.error(error);
     return Response.json({ artists: [] });
   }
 }

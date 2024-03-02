@@ -22,6 +22,7 @@ export async function GET() {
     
       return new Response(JSON.stringify(artists), { status: 200 });
  } catch (error) {
+    console.error(error);
     return Response.json([]);
   }
 }
