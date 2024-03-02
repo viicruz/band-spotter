@@ -6,7 +6,13 @@ export async function GET(request: NextRequest) {
   const query = searchParams.get("search");
   console.log(query);
 
-  const items = await spotifyClient.search(query || '', ["artist"], "BR", 5);
+  if (query === "") {
+    return Response.json({
+      artists: [],
+    });
+  }
+
+  const items = await spotifyClient.search(query || "", ["artist"], "BR", 5);
   return Response.json({
     artists: items.artists.items,
   });
