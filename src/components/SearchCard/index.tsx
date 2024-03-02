@@ -1,6 +1,7 @@
 "use client"
 //Libraries Imports
 import { UsersThree } from "@phosphor-icons/react";
+import Link from "next/link";
 
 //Components Imports
 import { MusicalGenreTag } from "../MusicalGenreTag";
@@ -11,12 +12,13 @@ type Props = {
   image: string,
   followers: number,
   genres: string[],
+  id: string,
 }
 
 export function SearchCard(props: Props) {
   return (
     <div className="bg-transparent rounded-lg transition-all hover:bg-gradient-to-br from-emerald-500 via-yellow-500 to-violet-500 p-[2px]">
-      <button className="w-full border border-neutral-200 rounded-lg p-1 flex flex-row  bg-white gap-1 line-clamp-2 ">
+      <Link href={'/artist/' + props.id} className="w-full border border-neutral-200 rounded-lg p-1 flex flex-row  bg-white gap-1 line-clamp-2 ">
 
         <div className="flex flex-row items-center gap-1">
 
@@ -45,7 +47,7 @@ export function SearchCard(props: Props) {
 
         </div>
 
-      </button>
+      </Link>
     </div>
 
   )
