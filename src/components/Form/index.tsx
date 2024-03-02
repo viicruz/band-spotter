@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 //* Local Imports
 import { InfoInput } from "../InfoInput";
 import { FormButton } from "../FormButton";
-import { ModalArtistCard } from "../FormArtistCard";
 import { contractArtistSchema, type FormData, type States } from "@/schemas/contractArtist";
 import { getCep } from "@/services/viaCep";
 
@@ -53,21 +52,15 @@ export function Form() {
 
   return (
     <form
-      className='flex flex-col items-center gap-6 p-4 border-2 border-black rounded-lg'
+      className='flex flex-col items-center gap-6'
       onSubmit={form.handleSubmit(handleSubmit)}
     >
-      <h1 className='pb-3 text-3xl font-bold text-black'>
+      <h2 className='pb-3 text-3xl font-bold text-black'>
         Contrate este artista
-      </h1>
+      </h2>
 
-      <ModalArtistCard
-        image="/defaultImage.svg"
-        name="Nome do artista"
-        followers={1000}
-        genres={['Pop', 'Rock', 'Sertanejo']}
-      />
 
-      <div className='flex flex-col items-start w-full h-full gap-6 pt-6'>
+      <div className='flex flex-col items-start w-full gap-6'>
         <div className='flex flex-col w-full gap-2 '>
 
           <InfoInput
