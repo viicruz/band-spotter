@@ -1,7 +1,7 @@
 "use client"
 //Libraries Imports
 import Image from 'next/image';
-import { Modal } from '@/components/Form';
+import { Form } from '@/components/Form';
 
 
 
@@ -10,7 +10,7 @@ export default function Design() {
 
     <div className="w-full min-h-svh flex bg-white justify-center ">
 
-      <Modal />
+      <Form />
 
     </div>
 
