@@ -162,6 +162,7 @@ export const contractArtistSchema = z.object({
   neighborhood: neighborhoodSchema,
   city: citySchema,
   state: statesEnum,
+  artistId: z.string()
 });
 
 export type FormData = z.infer<typeof contractArtistSchema>;

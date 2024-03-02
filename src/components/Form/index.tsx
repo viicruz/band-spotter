@@ -5,6 +5,8 @@ import type { ChangeEvent } from "react";
 import { User, Money, Calendar, MapPin } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
 //* Local Imports
 import { InfoInput } from "../InfoInput";
@@ -22,9 +24,11 @@ async function postContractArtist(data: FormData) {
 }
 
 export function Form() {
+  const params = useParams<{ artistId: string }>()
   const form = useForm<FormData>({
     resolver: zodResolver(contractArtistSchema),
   });
+
 
   function handleSubmit(data: FormData) {
     postContractArtist(data);
@@ -49,6 +53,10 @@ export function Form() {
       form.setValue('state', '' as States);
     }
   }
+
+  useEffect(() => {
+    form.setValue('artistId', params.artistId)
+  }, [])
 
   return (
     <form
