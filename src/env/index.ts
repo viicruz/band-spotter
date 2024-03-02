@@ -5,7 +5,6 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   SPOTIFY_CLIENT_ID: z.string(),
   SPOTIFY_SECRET_ID: z.string(),
-  REDIRECT_TARGET: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);
