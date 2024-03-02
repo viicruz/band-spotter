@@ -20,7 +20,7 @@ export function ArtistSection(props: Props) {
           <li className=' flex flex-row gap-3 p-2'>
             {props.artists?.map((artist, index) => {
               return (
-                <ArtistCard name={artist.name} followers={artist.followers.total} image={artist.images[0]?.url || '/defaultImage.svg'} key={index} />
+                <ArtistCard id={artist.id} name={artist.name} followers={artist.followers.total} image={artist.images[0]?.url || '/defaultImage.svg'} key={index} />
               )
             })}
           </li>
