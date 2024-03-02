@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 //* Local Imports
 import { InfoInput } from "../InfoInput";
@@ -31,7 +32,12 @@ export function Form() {
 
 
   function handleSubmit(data: FormData) {
-    postContractArtist(data);
+    postContractArtist(data).then(() => {
+      toast.success("Artista contratado com sucesso!", { duration: 3000, position:"top-center" })
+    }).catch(() => {
+      toast.error("Erro desconhecido!", { duration: 3000 })
+    });
+
   }
 
   const handleCep = async (cep: string) => {
