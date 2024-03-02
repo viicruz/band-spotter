@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   const parsedData = contractArtistSchema.parse(data);
   const assign = await p.assign.create({
     data:{
-      artistId: parsedData.artistId
+      artist_id: parsedData.artistId
     }
   })
 

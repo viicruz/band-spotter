@@ -14,6 +14,7 @@ datasource db {
 }
 
 model assign {
-  id       String @id @default(uuid())
-  artistId String
+  id         String   @id @default(uuid())
+  artist_id  String
+  created_at DateTime @default(now())
 }
