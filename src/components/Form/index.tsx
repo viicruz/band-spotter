@@ -5,7 +5,7 @@ import type { ChangeEvent } from "react";
 import { User, Money, Calendar, MapPin } from "@phosphor-icons/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
@@ -29,11 +29,13 @@ export function Form() {
   const form = useForm<FormData>({
     resolver: zodResolver(contractArtistSchema),
   });
+  const router = useRouter();
 
 
   function handleSubmit(data: FormData) {
     postContractArtist(data).then(() => {
-      toast.success("Artista contratado com sucesso!", { duration: 3000, position:"top-center" })
+      toast.success("Artista contratado com sucesso!", { duration: 3000, position: "top-center" })
+      router.push('/')
     }).catch(() => {
       toast.error("Erro desconhecido!", { duration: 3000 })
     });
