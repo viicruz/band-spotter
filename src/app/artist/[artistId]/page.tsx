@@ -29,18 +29,17 @@ export default function ArtistDetail({ params }: { params: { artistId: string } 
   }, [params.artistId])
 
   return (
-    <div className="flex relative min-h-svh flex-col items-center  w-full bg-white">
-      <div className="w-full h-32 bg-gradient-to-br from-yellow-400 via-emerald-500 to-violet-500 absolute left-0 top-0" />
-      <div className='flex justify-center items-center flex-col h-64 bg-white/20 z-[1] backdrop-blur-3xl w-full '>
+    <div className="relative flex flex-col items-center w-full bg-white min-h-svh">
+      <div className='absolute top-0 left-0 w-full h-full'>
         <NavBar />
       </div>
 
-      <main className="w-full max-w-7xl" >
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-yellow-400 via-emerald-500 to-violet-500" />
+      <div className='absolute left-0 top-0 flex justify-center items-center flex-col h-64 bg-white/20 z-[1] backdrop-blur-3xl w-full' />
+
+      <main className="w-full pb-12 max-w-7xl z-[2] pt-32" >
         <ArtistDetailSection albums={albums} artist={artist} />
       </main>
     </div>
-
-
-
   );
 }
