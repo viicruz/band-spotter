@@ -1,5 +1,6 @@
 import { ArtistCard } from '@/components/ArtistCard';
 import { type Artist } from '@spotify/web-api-ts-sdk';
+import { ArtistCardSkeleton } from '@/components/ArtistCardSkeleton'
 
 type Props = {
   title: string,
@@ -23,6 +24,28 @@ export function ArtistSection(props: Props) {
                 <ArtistCard id={artist.id} name={artist.name} followers={artist.followers.total} image={artist.images[0]?.url || '/defaultImage.svg'} key={index} />
               )
             })}
+          </li>
+        </ul>
+      </div>
+
+    </section>
+  )
+}
+
+export function ArtistSectionSkeleton() {
+  return (
+    <section className='flex justify-center p-8'>
+      <div className='flex-col p-4 bg-white border rounded-lg shadow-lg border-neutral-300'>
+        <div className='flex justify-center pb-1 border-b-2 border-emerald-500'>
+          <div className='w-1/2 rounded-lg h-9 bg-neutral-300 animate-pulse' />
+        </div>
+        <ul>
+          <li className='flex flex-row gap-3 p-2'>
+            <ArtistCardSkeleton />
+            <ArtistCardSkeleton />
+            <ArtistCardSkeleton />
+            <ArtistCardSkeleton />
+            <ArtistCardSkeleton />
           </li>
         </ul>
       </div>
