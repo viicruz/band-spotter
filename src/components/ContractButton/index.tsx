@@ -19,11 +19,10 @@ export function ContractButton() {
                     <Form />
                     <Dialog.Title />
                     <Dialog.Close asChild className='absolute flex flex-row p-2'>
-                        <button><X className='text-lg text-neutral-700 pb-2' /></button>
+                        <button><X className='text-lg text-neutral-700 '/></button>
                     </Dialog.Close>
                 </Dialog.Content>
             </Dialog.Portal>
-
         </Dialog.Root>
     )
 }
