@@ -5,7 +5,10 @@ import type { Artist } from "@spotify/web-api-ts-sdk";
 
 async function getArtists() {
   const response = await fetch('/api/last-assigns', {
-    cache: 'no-cache'
+    cache: 'no-store',
+    next: {
+      revalidate: 0,
+    },
   });
   const artists = (await response.json());
   return artists as Artist[];

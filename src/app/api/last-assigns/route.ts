@@ -4,24 +4,28 @@ import type { Artist } from "@spotify/web-api-ts-sdk";
 
 import { p } from "@/db";
 
+export const revalidate = 1; //revalidates every one second -- requires page reload
+
 export async function GET() {
- try{
+  try {
     const artistsIds = await p.assign.findMany({
-        take: 5,
-        orderBy: {
-          created_at: "desc",
-        },
-      });
-    
-      const artists: Artist[] = [];
-    
-      for (let index = 0; index < artistsIds.length; index++) {
-        const artist = await spotifyClient.artists.get(artistsIds[index].artist_id);
-        artists.push(artist);
-      }
-    
-      return new Response(JSON.stringify(artists), { status: 200 });
- } catch (error) {
+      take: 5,
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    const artists: Artist[] = [];
+
+    for (let index = 0; index < artistsIds.length; index++) {
+      const artist = await spotifyClient.artists.get(
+        artistsIds[index].artist_id
+      );
+      artists.push(artist);
+    }
+
+    return new Response(JSON.stringify(artists), { status: 200 });
+  } catch (error) {
     console.error(error);
     return Response.json([]);
   }
