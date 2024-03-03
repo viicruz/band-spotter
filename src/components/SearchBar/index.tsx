@@ -56,6 +56,7 @@ export function SearchBar() {
               <li className='pt-2 pb-2 flex gap-2 flex-col'>
                 {artists.map((data, index) => (
                   <SearchCard
+                    id={data.id}
                     name={data.name}
                     followers={data.followers.total}
                     genres={data.genres}

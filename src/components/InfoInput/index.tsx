@@ -25,7 +25,7 @@ export const InfoInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
       <label className='pb-1 text-base font-bold text-black' htmlFor={props.id}>
         {props.label}
       </label>
-      <div className="flex flex-row items-center justify-center gap-3 p-3 border-2 border-black rounded-lg text-blackbg-red-800">
+      <div className="flex flex-row items-center justify-center gap-3 p-3 border border-neutral-300 rounded-lg text-blackbg-red-800">
         <Icon className="text-base text-neutral-600" />
         <input
           className="w-full h-full px-2 text-base text-black placeholder-opacity-50 bg-transparent outline-none placeholder:text-neutral-600"
