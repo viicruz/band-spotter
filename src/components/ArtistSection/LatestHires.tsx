@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import type { Artist } from "@spotify/web-api-ts-sdk";
 
 async function getArtists() {
-  const response = await fetch('/api/last-assigns');
+  const response = await fetch('/api/last-assigns', {
+    cache: 'no-cache'
+  });
   const artists = (await response.json());
   return artists as Artist[];
 }

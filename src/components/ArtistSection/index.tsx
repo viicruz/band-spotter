@@ -12,7 +12,7 @@ export function ArtistSection(props: Props) {
   return (
     <section className='justify-center flex  p-8 '>
       <div className='  bg-white shadow-lg p-4 flex-col border border-neutral-300 rounded-lg'>
-        <div className='flex justify-center border-b-2 border-emerald-500'>
+        <div className='flex justify-center border-b-2 border-neutral-300'>
           <h2 className='text-emerald-500 text-bold text-3xl'>
             {props.title}
           </h2>
