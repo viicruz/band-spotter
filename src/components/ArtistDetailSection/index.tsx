@@ -6,6 +6,7 @@ import { Album, Artist } from '@spotify/web-api-ts-sdk';
 import { Avatar } from '../Avatar';
 import { ContractButton } from '../ContractButton';
 import { DicoCard } from '../DiscoCard';
+import { DiscoCardSkeleton } from '../DiscoCardSkeleton';
 
 type Props = {
   artist: Artist | null,
@@ -46,6 +47,43 @@ export function ArtistDetailSection(props: Props) {
             {props.albums.map((album) => (
               <DicoCard name={album.name} key={album.id} image={album.images[0].url} type={album.album_type} year={album.release_date.substring(0, 4)}></DicoCard>
             ))}
+          </li>
+        </ul>
+
+      </div>
+    </section>
+  );
+}
+
+export function ArtistDetailSectionSkeleton() {
+
+  return (
+    <section className="flex flex-row gap-8 px-4 py-4 bg-white border rounded-lg shadow-lg border-neutral-200">
+      <div className="flex flex-col gap-3 min-w-64">
+        <div className='overflow-hidden rounded-full min-w-64 max-w-64 min-h-64 max-h-64 animate-pulse bg-neutral-300' />
+        <div className='w-full rounded-lg h-9 bg-neutral-300 animate-pulse' />
+
+        <div className='flex items-center justify-center w-full'>
+          <div className='w-full rounded-lg h-11 bg-neutral-300 animate-pulse' />
+        </div>
+
+        <div className='flex flex-row flex-wrap gap-2'>
+          <div className='w-full h-8 rounded-lg bg-neutral-200 animate-pulse' />
+          <div className='w-full h-8 rounded-lg bg-neutral-200 animate-pulse' />
+          <div className='w-full h-8 rounded-lg bg-neutral-200 animate-pulse' />
+        </div>
+
+      </div>
+      <div className='flex flex-col'>
+        <div className='w-32 h-8 rounded-lg bg-neutral-200 animate-pulse' />
+        <ul>
+          <li className='flex flex-wrap gap-2 line-clamp-2'>
+            <DiscoCardSkeleton />
+            <DiscoCardSkeleton />
+            <DiscoCardSkeleton />
+            <DiscoCardSkeleton />
+            <DiscoCardSkeleton />
+            <DiscoCardSkeleton />
           </li>
         </ul>
 

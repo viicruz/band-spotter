@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 //Components imports
 import { NavBar } from '@/components/NavBar';
-import { ArtistDetailSection } from '@/components/ArtistDetailSection';
+import { ArtistDetailSection, ArtistDetailSectionSkeleton } from '@/components/ArtistDetailSection';
 
 async function getArtistbyId(id: string) {
   const response = await fetch('/api/artist/' + id);
@@ -18,13 +18,16 @@ async function getArtistbyId(id: string) {
 }
 
 export default function ArtistDetail({ params }: { params: { artistId: string } }) {
+  const [loading, setLoading] = useState(true);
+
   const [artist, setArtist] = useState<Artist | null>(null);
   const [albums, setAlbums] = useState<Album[]>([]);
 
   useEffect(() => {
     getArtistbyId(params.artistId).then(data => {
-      setArtist(data.artist)
-      setAlbums(data.albums)
+      setArtist(data.artist);
+      setAlbums(data.albums);
+      setLoading(false);
     })
   }, [params.artistId])
 
@@ -38,7 +41,11 @@ export default function ArtistDetail({ params }: { params: { artistId: string } 
       <div className='absolute left-0 top-0 flex justify-center items-center flex-col h-64 bg-white/20 z-[1] backdrop-blur-3xl w-full' />
 
       <main className="w-full pb-12 max-w-7xl z-[2] pt-32" >
-        <ArtistDetailSection albums={albums} artist={artist} />
+        {
+          loading
+            ? <ArtistDetailSectionSkeleton />
+            : <ArtistDetailSection artist={artist} albums={albums} />
+        }
       </main>
     </div>
   );
