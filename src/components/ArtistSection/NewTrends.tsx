@@ -1,7 +1,8 @@
 "use client"
-import { ArtistSection } from ".";
+import { ArtistSection, ArtistSectionSkeleton } from ".";
 import { useState, useEffect } from "react";
 import type { Artist } from "@spotify/web-api-ts-sdk";
+
 
 async function getArtists() {
     const response = await fetch('/api/get-artists-from-playlist/37i9dQZF1DX0FOF1IUWK1W');
@@ -10,11 +11,21 @@ async function getArtists() {
 }
 
 export function NewTrends() {
+    const [loading, setLoading] = useState(true);
     const [artists, setArtist] = useState<Artist[]>([]);
     useEffect(() => {
-        getArtists().then((data) => setArtist(data) );
-    }, [])
+        getArtists().then((data) => {
+            setArtist(data);
+            setLoading(false);
+        });
+    }, []);
     return (
-        <ArtistSection title="Últimas tendências" artists={artists} />
+        <>
+            {
+                loading
+                    ? <ArtistSectionSkeleton />
+                    : <ArtistSection title="Novas tendências" artists={artists} />
+            }
+        </>
     );
 } 
