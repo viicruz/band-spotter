@@ -16,6 +16,7 @@ BandSpotter é um projeto desenvolvido como parte do teste para a vaga de estág
 
 ## Tecnologias Utilizadas
 
+- [Figma do projeto](https://www.figma.com/file/0B1RvXZQ0Su2LiMz74Zd4N/BandSpotter?type=design&node-id=0%3A1&mode=design&t=IgpyTII0T6My9AhB-1)
 - [Next.js](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Zod](https://zod.dev/)
@@ -54,3 +55,7 @@ BandSpotter é um projeto desenvolvido como parte do teste para a vaga de estág
    ```
 
 Após seguir os passos acima, o projeto estará acessível em [http://localhost:3000/](http://localhost:3000/).
+
+## Possíveis Problemas
+
+Devido às políticas de proteção de chave de API da Spotify, talvez seja necessário rotacionar `SPOTIFY_SECRET_ID` caso as requisições parem subitamente de serem feitas. Você pode rotacioná-lo apenas clicando em `Rotate client secret` no Dashboard de sua aplicação presente neste link: [https://developer.spotify.com/](https://developer.spotify.com/).
