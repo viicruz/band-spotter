@@ -102,11 +102,11 @@ export function Form() {
             {...form.register("cashe", {
               required: true,
               min: 1,
-              max: 10000,
+              max: 10000000,
               onChange: (e: ChangeEvent<HTMLInputElement>) => {
                 const value = e.target.value;
                 const removeNonDigits = value.replace(/\D/g, "");
-                const removeExtraDigits = removeNonDigits.slice(0, 6);
+                const removeExtraDigits = removeNonDigits.slice(0, 9);
                 form.setValue("cashe", Number(removeExtraDigits));
               }
             })}
@@ -133,6 +133,9 @@ export function Form() {
         </div>
 
         <div className='flex flex-col w-full py-2'>
+          <p className="w-full text-neutral-600 font-bold text-start pb-1">
+            Local do evento
+          </p>
           <div className='flex flex-row gap-2'>
 
             <InfoInput

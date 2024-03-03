@@ -59,8 +59,8 @@ const casheSchema = z.coerce
   .min(100, {
     message: "O valor mínimo é R$ 100,00",
   })
-  .max(10000, {
-    message: "O valor máximo é R$ 10.000,00",
+  .max(1000000, {
+    message: "O valor máximo é R$ 1.000.000,00",
   });
 
 const dateSchema = z
